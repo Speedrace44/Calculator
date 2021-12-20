@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import java.math.BigDecimal
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,7 +85,11 @@ class MainActivity : AppCompatActivity() {
         } else {
             val digit = Integer.parseInt(b.text.toString())
             if (operations.size == 1) {
-                if("." in baseNum.text){
+                if("E" in baseNum.text){
+                    operations[0] = (BigDecimal(operations[0]).toPlainString() + digit.toString()).toFloat().toString()
+                    baseNum.text = (BigDecimal(baseNum.text.toString()).toPlainString() + digit.toString()).toFloat().toString()
+                }
+                else if("." in baseNum.text){
                     operations[0] = operations[0] + digit.toString()
                     baseNum.text = baseNum.text.toString() + "$digit"
                 }
@@ -96,7 +101,11 @@ class MainActivity : AppCompatActivity() {
                 operations.add(digit.toString())
                 baseNum.text = digit.toString()
             } else {
-                if("." in baseNum.text){
+                if("E" in baseNum.text){
+                    operations[2] = (BigDecimal(operations[2]).toPlainString() + digit.toString()).toFloat().toString()
+                    baseNum.text = (BigDecimal(baseNum.text.toString()).toPlainString() + digit.toString()).toFloat().toString()
+                }
+                else if("." in baseNum.text){
                     operations[2] = operations[2] + digit.toString()
                     baseNum.text = baseNum.text.toString() + "$digit"
                 }
